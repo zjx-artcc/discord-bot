@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "types": ["node"],
+    "outDir": "./build",
+    "allowJs": true,
+    "target": "ES2024",
+    "esModuleInterop": true,
+    "lib": ["ES2021", "DOM"],
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
+  },
+  "include": ["./src/**/*", "database.types.ts"]
+}
