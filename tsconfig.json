@@ -8,6 +8,10 @@
     "lib": ["ES2021", "DOM"],
     "moduleResolution": "nodenext",
     "module": "nodenext",
+    "inlineSources": true,
+    "sourceMap": true,
+    "sourceRoot": "/",
+    "skipLibCheck": true
   },
   "include": ["./src/**/*", "database.types.ts"]
 }
