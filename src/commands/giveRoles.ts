@@ -1,4 +1,5 @@
 import { ChatInputCommandInteraction, Interaction, Role, SlashCommandBuilder } from "discord.js";
+import * as config from "../config";
 
 export const data = new SlashCommandBuilder()
   .setName("giveroles")
@@ -18,8 +19,4 @@ export async function execute(interaction: ChatInputCommandInteraction) {
   console.log(res);
 
   await interaction.editReply("Your roles have been updated!");
-}
-
-interface IStringIndex {
-  [key: string]: any;
 }
