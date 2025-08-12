@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, Interaction, Role, SlashCommandBuilder } from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import type { User } from 'vatusa-api-types';
 import { config } from "../config";
 
@@ -8,8 +8,6 @@ export const data = new SlashCommandBuilder()
 
 export async function execute(interaction: ChatInputCommandInteraction) {
   await interaction.deferReply();
-
-  let roles: Role[] = [];
 
   //TODO: Rebuild to be based on the website database
   
