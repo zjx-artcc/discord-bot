@@ -1,7 +1,6 @@
 services:
   bot:
-    build: 
-      context: .
+    image: ghcr.io/zjx-artcc/discord-bot:master
     container_name: discord-bot
     restart: unless-stopped
     environment:
