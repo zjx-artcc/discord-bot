@@ -19,7 +19,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds]});
 
 client.commands = new Collection();
 
-const commandFiles = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js") || file.endsWith(".ts"));
+const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js") || file.endsWith(".ts"));
 for (const file of commandFiles) {
   const command: SlashCommand = require(`./commands/${file}`);
   if ("data" in command && "execute" in command) {
