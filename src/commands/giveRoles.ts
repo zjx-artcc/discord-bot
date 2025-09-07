@@ -1,6 +1,5 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import type { User } from 'vatusa-api-types';
-import { config } from "../config";
 
 export const data = new SlashCommandBuilder()
   .setName("giveroles")
@@ -29,7 +28,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
   let req = await fetch(`https://api.vatusa.net/v2/user/${cid}`);
   if (req.status == 404) {
     // One of many ways to detect a pilot
-    await member.roles.add(config.pilot);
+    await member.roles.add(interaction.guild?.roles.cache.find(role => role.name === "Community Member"));
     await interaction.editReply("Your roles have been updated!");
     return;
   }
@@ -37,60 +36,60 @@ export async function execute(interaction: ChatInputCommandInteraction) {
   let res = await req.json() as User;
   console.log(res);
 
-  await member.roles.add(config.controller);
+  await member.roles.add(interaction.guild?.roles.cache.find(role => role.name === "VATSIM Controller"));
 
   switch (res.data.rating) { 
     case 1: {
-      await member.roles.add(config.OBS);
+      await member.roles.add(interaction.guild?.roles.cache.find(role => role.name === "OBS"));
       break;
     }
     case 2: {
-      await member.roles.add(config.S1);
+      await member.roles.add(interaction.guild?.roles.cache.find(role => role.name === "S1"));
       break;
     }
     case 3: {
-      await member.roles.add(config.S2);
+      await member.roles.add(interaction.guild?.roles.cache.find(role => role.name === "S2"));
       break;
     }
     case 4: {
-      await member.roles.add(config.S3);
+      await member.roles.add(interaction.guild?.roles.cache.find(role => role.name === "S3"));
       break;
     }
     case 5: {
-      await member.roles.add(config.C1);
+      await member.roles.add(interaction.guild?.roles.cache.find(role => role.name === "C1"));
       break;
     }
     //6 = C2, not used for VATSIM
     case 7: {
-      await member.roles.add(config.C3);
+      await member.roles.add(interaction.guild?.roles.cache.find(role => role.name === "C3"));
       break;
     }
     case 8: {
-      await member.roles.add(config.I1);
+      await member.roles.add(interaction.guild?.roles.cache.find(role => role.name === "I1"));
       break;
     }
     //9 = I2, not used for VATSIM
     case 10: {
-      await member.roles.add(config.I3);
+      await member.roles.add(interaction.guild?.roles.cache.find(role => role.name === "I3"));
       break;
     }
     case 11: {
-      await member.roles.add(config.SUP);
+      await member.roles.add(interaction.guild?.roles.cache.find(role => role.name === "SUP"));
       break;
     }
     case 12: {
-      await member.roles.add(config.ADM);
+      await member.roles.add(interaction.guild?.roles.cache.find(role => role.name === "ADM"));
       break;
     }
   }
 
   await member.setNickname(`${res.data.fname} ${res.data.lname} | ${res.data.facility}`)
   if (res.data.facility == "ZJX") {
-    await member.roles.add(config.home);
+    await member.roles.add(interaction.guild?.roles.cache.find(role => role.name === "ZJX Controller"));
   } else {
     for (let visitingFacility of res.data.visiting_facilities) {
       if (visitingFacility.facility == "ZJX") {
-        await member.roles.add(config.visitor);
+        await member.roles.add(interaction.guild?.roles.cache.find(role => role.name === "Visiting Controller"));
         break;
       }
     }

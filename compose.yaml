@@ -1,0 +1,15 @@
+services:
+  bot:
+    build: 
+      context: .
+    container_name: discord-bot
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+      VATUSA_API_KEY: ${VATUSA_API_KEY}
+      SENTRY_ORG: vzjx-artcc
+      SENTRY_PROJECT: discord-bot
+      SENTRY_AUTH_TOKEN: ${SENTRY_AUTH_TOKEN}
+      GUILD_ID: 786758356194164757
+      CLIENT_ID: 1381423842420985947

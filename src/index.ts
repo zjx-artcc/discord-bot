@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { ChatInputCommandInteraction, Client, Collection, Events, GatewayIntentBits, SlashCommandBuilder } from "discord.js";
+import { Client, Collection, Events, GatewayIntentBits } from "discord.js";
 import fs from "fs";
 import * as Sentry from "@sentry/node";
 import type { SlashCommand } from './types/SlashCommand';

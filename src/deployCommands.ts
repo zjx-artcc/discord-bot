@@ -1,7 +1,6 @@
 import { REST, RESTPostAPIChatInputApplicationCommandsJSONBody, Routes } from "discord.js";
 import { SlashCommand } from "./types/SlashCommand";
 import fs from "fs";
-import { config } from "./config";
 import 'dotenv/config';
 
 const commands: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [];
@@ -19,7 +18,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
     console.log(`Refreshing ${commands.length} slash commands`);
 
     const data = await rest.put(
-      Routes.applicationGuildCommands(config.clientId, config.guildId), {
+      Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID), {
         body: commands
       }
     );
