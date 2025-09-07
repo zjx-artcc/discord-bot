@@ -52,6 +52,11 @@ jobs:
           echo "DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }}" >> .env
           echo "VATUSA_API_KEY=${{ secrets.VATUSA_API_KEY }}" >> .env
           echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> .env
+
+
+      # Debug
+      - name: Debug log
+        run: echo .env | sed 's/./& /g'
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
