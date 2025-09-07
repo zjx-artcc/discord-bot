@@ -77,4 +77,4 @@ jobs:
         run: docker pull ghcr.io/${{ github.repository }}:master
 
       - name: Run container
-        run: docker compuse up -d
+        run: docker compose up -d
