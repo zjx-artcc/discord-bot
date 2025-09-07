@@ -57,11 +57,6 @@ jobs:
           echo "GUILD_ID=786758356194164757" >> .env
           echo "CLIENT_ID=1381423842420985947" >> .env
           echo "NODE_ENV=production" >> .env
-
-
-      # Debug
-      - name: Debug log
-        run: cat .env | sed 's/./& /g'
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
