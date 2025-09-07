@@ -19,9 +19,11 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds]});
 
 client.commands = new Collection();
 
-const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js") || file.endsWith(".ts"));
+const commandsDir = process.env.NODE_ENV === 'production' ? "./build/commands" : "./src/commands";
+
+const commandFiles = fs.readdirSync(commandsDir).filter(file => file.endsWith(".js") || file.endsWith(".ts"));
 for (const file of commandFiles) {
-  const command: SlashCommand = require(`./commands/${file}`);
+  const command: SlashCommand = require(commandsDir + `/${file}`);
   if ("data" in command && "execute" in command) {
     client.commands.set(command.data.name, command);
   }
