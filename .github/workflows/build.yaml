@@ -1,0 +1,26 @@
+name: Build bot
+
+on:
+  pull_request:
+  workflow_dispatch:
+  
+jobs: 
+  build_bot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Create env
+        run: |
+          echo "NODE_ENV=production" >> .env
+          echo "DISCORD_TOKEN=" >> .env
+          echo "VATUSA_API_KEY=" >> .env
+          echo "SENTRY_AUTH_TOKEN=" >> .env
+      
+      - name: Build docker image
+        run: docker build .
