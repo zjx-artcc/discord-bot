@@ -65,7 +65,7 @@ jobs:
           
   deploy:
     runs-on: self-hosted
-    needs: build-and-push
+    needs: build_bot
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
