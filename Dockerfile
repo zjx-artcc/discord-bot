@@ -17,4 +17,4 @@ RUN pnpm dc
 
 USER node
 
-CMD ["node", "./dist/index.js"]
+CMD ["node", "./build/index.js"]
