@@ -49,6 +49,14 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		interaction.guild?.roles.cache.find((role) => role.name === 'VATSIM Controller')
 	);
 
+  //Remove rating roles
+  for (let roleName of ['OBS', 'S1', 'S2', 'S3', 'C1', 'C3', 'I1', 'I3', 'SUP', 'ADM']) {
+    let role = interaction.guild?.roles.cache.find((role) => role.name === roleName);
+    if (member.roles.cache.has(role.id)) {
+      await member.roles.remove(role);
+    }
+  }
+
 	switch (res.data.rating) {
 		case 1: {
 			await member.roles.add(interaction.guild?.roles.cache.find((role) => role.name === 'OBS'));
