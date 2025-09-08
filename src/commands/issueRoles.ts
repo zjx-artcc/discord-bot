@@ -1,16 +1,21 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
-import type { User } from 'vatusa-api-types';
+import { ChatInputCommandInteraction, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
+import { User } from 'vatusa-api-types';
 
 export const data = new SlashCommandBuilder()
-	.setName('giveroles')
-	.setDescription('Gives roles to a user');
+	.setName('issueroles')
+	.setDescription('Used by staff to issue roles to a user')
+	.addUserOption((option) =>
+		option
+			.setName('userid')
+			.setDescription('The ID of the user to issue roles to')
+			.setRequired(true)
+	)
+	.setDefaultMemberPermissions(PermissionFlagsBits.MoveMembers); //Allow mentors and higher to use this command
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	await interaction.deferReply();
 
-	//TODO: Rebuild to be based on the website database
-
-	const uid = interaction.user.id;
+	const uid = interaction.options.getUser('userid')?.id;
 
 	let cid: string;
 
