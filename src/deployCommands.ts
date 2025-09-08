@@ -7,7 +7,7 @@ const commands: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [];
 const commandFiles = fs.readdirSync("./src/commands");
 
 for (const file of commandFiles) {
-  const command: SlashCommand = require(`./commands/${file}`);
+  const command: SlashCommand = require(`./src/commands/${file}`);
   commands.push(command.data.toJSON());
 }
 
