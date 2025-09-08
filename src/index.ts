@@ -3,6 +3,7 @@ import { Client, Collection, Events, GatewayIntentBits } from "discord.js";
 import fs from "fs";
 import * as Sentry from "@sentry/node";
 import type { SlashCommand } from './types/SlashCommand';
+import path from 'path';
 
 // Extend the Client interface to include the commands property
 declare module "discord.js" {
@@ -19,11 +20,11 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds]});
 
 client.commands = new Collection();
 
-const commandsDir = process.env.NODE_ENV === 'production' ? "./build/commands" : "./src/commands";
+const commandsDir = path.join(__dirname, process.env.NODE_ENV === 'production' ? "../build/commands" : "/src/commands");
 
 const commandFiles = fs.readdirSync(commandsDir).filter(file => file.endsWith(".js") || file.endsWith(".ts"));
 for (const file of commandFiles) {
-  const command: SlashCommand = require(commandsDir + `/${file}`);
+  const command: SlashCommand = require(path.join(commandsDir, `/${file}`));
   if ("data" in command && "execute" in command) {
     client.commands.set(command.data.name, command);
   }

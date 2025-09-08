@@ -2,12 +2,18 @@ import { REST, RESTPostAPIChatInputApplicationCommandsJSONBody, Routes } from "d
 import { SlashCommand } from "./types/SlashCommand";
 import fs from "fs";
 import 'dotenv/config';
+import path from "path";
 
 const commands: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [];
-const commandFiles = fs.readdirSync("./commands");
+
+const commandsDir = path.join(__dirname, process.env.NODE_ENV === 'production' ? "../build/commands" : "/src/commands");
+console.log(commandsDir)
+
+const commandFiles = fs.readdirSync(commandsDir).filter(file => file.endsWith(".js") || file.endsWith(".ts"));
 
 for (const file of commandFiles) {
-  const command: SlashCommand = require(`./commands/${file}`);
+  console.log(commandsDir)
+  const command: SlashCommand = require(path.join(commandsDir,`/${file}`));
   commands.push(command.data.toJSON());
 }
 
