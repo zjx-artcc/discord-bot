@@ -23,7 +23,7 @@ jobs:
           echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> .env
           echo "SENTRY_ORG=vzjx-artcc" >> .env
           echo "SENTRY_PROJECT=discord-bot" >> .env
-          echo "GUILD_ID=786758356194164757" >> .env
+          echo "GUILD_ID=1298723213597085696" >> .env
           echo "CLIENT_ID=1381423842420985947" >> .env
 
       
