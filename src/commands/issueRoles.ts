@@ -110,5 +110,5 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		}
 	}
 
-	await interaction.editReply('Your roles have been updated!');
+	await interaction.editReply(`The roles for ${member.displayName} have been updated!`);
 }
