@@ -4,10 +4,10 @@ import fs from "fs";
 import 'dotenv/config';
 
 const commands: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [];
-const commandFiles = fs.readdirSync("./src/commands");
+const commandFiles = fs.readdirSync("./commands");
 
 for (const file of commandFiles) {
-  const command: SlashCommand = require(`./src/commands/${file}`);
+  const command: SlashCommand = require(`./commands/${file}`);
   commands.push(command.data.toJSON());
 }
 
